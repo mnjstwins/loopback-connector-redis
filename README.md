@@ -2,6 +2,10 @@
 
 Redis connector for loopback
 
+Documentation: TBD
+
+
+
 ## Customizing Redis configuration for tests/examples
 
 By default, examples and tests from this module assume there is a Redis server
@@ -27,11 +31,13 @@ The .loopbackrc file is in JSON format, for example:
         }
     }
 
-**Note**: username/password is only required if the Redis server has
-authentication enabled.
+**Note**: Redis databases with passwords are not supported at this point.
 
 ## Running tests
 
-    npm test
+ Ensure Redis server is running and .loopbackrc has an entry as mentioned above
+ * npm test - To run the test
+ * npm run coverage - To find the code coverage
 
 ## Release notes
+ Yet to be Released officially

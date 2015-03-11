@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test/*.test.js",
-    "coverage": "istanbul cover _mocha test --recursive -- -u      exports -R spec test/*.test.js && open coverage/lcov-report/index.html"
+    "coverage": "istanbul cover node_modules/.bin/_mocha test/*.test.js && open coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",
