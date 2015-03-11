@@ -3,6 +3,7 @@ logs
 *.log
 
 .idea
+coverage
 
 # Runtime data
 pids
