@@ -16,12 +16,22 @@ describe('DataSource',function(){
       email: { type: String},
       age: Number
     });
+    Project = ds.define('Project', {
+      id:{ type:String },
+      name: { type: String},
+      owner:{ type: String}
+    });
 
     ds.connect(function(err,status){
       expect(err).to.be.null;
       User.destroyAll(function(err){
         expect(err).to.be.null;
-        done();
+
+        Project.destroyAll(function(err){
+          expect(err).to.be.null;
+          done();
+        });
+
       });
 
     })
@@ -37,7 +47,7 @@ describe('DataSource',function(){
     expect(ds.connector.settings.port).to.equal(6379);
   });
 
-  it('should be able to create User',function(done){
+  it('should be able to create User with id',function(done){
 
     var user1={id:'200',name: 'John'};
     User.create(user1, function (err, user) {
@@ -46,6 +56,22 @@ describe('DataSource',function(){
       expect(user.name).to.equal(user1.name);
       User.findById('200',function(err,res){
         expect(res.id).to.equal(user1.id);
+        expect(res.name).to.equal(user1.name);
+        done();
+      })
+
+    });
+  });
+
+  it('should be able to create User without id',function(done){
+
+    var user1={name: 'John'};
+    User.create(user1, function (err, user) {
+      expect(err).to.be.null;
+      expect(user.id).not.be.null;
+      expect(user.name).to.equal(user1.name);
+      User.findById(user.id,function(err,res){
+        expect(res.id).not.be.null;
         expect(res.name).to.equal(user1.name);
         done();
       })
@@ -72,6 +98,37 @@ describe('DataSource',function(){
 
     });
   });
+
+  it('should be able to destroy all Users',function(done){
+
+    var user1={id:'200',name: 'John'};
+    var project1= {id:'100',name:'hr',owner:'Smith'};
+    Project.create(project1,function(err,project) {
+
+      User.create(user1, function (err, user) {
+        expect(err).to.be.null;
+
+        User.destroyAll(function (err) {
+          expect(err).to.be.null;
+          Project.findById('100',function(err,project){
+            //Check if project still exists
+            expect(project.id).to.equal(project1.id);
+
+            //Check the count of Users
+            User.count(function(err,count){
+              expect(count).to.equal(0);
+              done();
+            });
+
+          })
+
+        });
+
+
+      });
+    });
+  });
+
 
   it('should be able to count User',function(done){
 
