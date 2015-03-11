@@ -4,7 +4,8 @@
   "description": "Loopback Connector for Redis NoSQL Database. LoopBack is an API Mgmt/MBaas platform built on top of express by Strongloop. It supports the notion of connectors to connect to databases, restful web services, soap web services etc. This project is a connector for loopback for connecting to Redis Database.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*.test.js"
+    "test": "mocha test/*.test.js",
+    "coverage": "istanbul cover _mocha test --recursive -- -u      exports -R spec test/*.test.js && open coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,17 @@
   },
   "homepage": "https://github.com/Synerzip/loopback-connector-redis",
   "dependencies": {
-    "chai": "^2.1.1",
     "loopback-connector": "^1.2.1",
     "loopback-datasource-juggler": "^2.19.2",
+    "redis": "^0.12.1"
+
+  },
+  "devDependencies": {
+    "istanbul": "^0.3.7",
+    "chai": "^2.1.1",
+    "istanbul": "^0.3.7",
     "mocha": "^2.2.1",
     "rc": "^0.6.0",
-    "redis": "^0.12.1",
     "should": "^5.1.0"
   }
 }
