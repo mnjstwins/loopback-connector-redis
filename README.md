@@ -15,19 +15,13 @@ The .loopbackrc file is in JSON format, for example:
     {
         "dev": {
             "redis": {
-                "host": "127.0.0.1",
-                "database": "test",
-                "username": "youruser",
-                "password": "yourpass",
+                "host": "192.168.59.103",
                 "port": 6379
             }
         },
         "test": {
             "redis": {
-                "host": "127.0.0.1",
-                "database": "test",
-                "username": "youruser",
-                "password": "yourpass",
+                "host": "192.168.59.103",
                 "port": 6379
             }
         }
